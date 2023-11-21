@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Table</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+
+    <style>
+    .lime-text { color: lime; }
+</style>
+</head>
+<body style="background-color: black;">
+
+<div class="container-fluid bg-dark text-light py-3">
+    <header class="text-center">
+        <h1 class="display-6 lime-text">Open Tickets</h1>
+    </header>
+</div>
+<section class="container-fluid
+d-flex flex-column
+ align-items-center
+ justify-content-center
+  my-2
+   bg-dark text-light
+   p-2">
+
+
+    <!-- Filter Form -->
+    <form action="/opentickets" method="get" class="form-inline mb-3">
+        <div class="form-group mb-2">
+            <input type="text" class="form-control"
+                   name="keyword" th:value="${product_code}" id="keyword" placeholder="Global Search"
+                   style="width: 300px;">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2 mx-2 " style="width: 140px">Search</button>
+        <a th:href="@{/closedtickets}" class="btn btn-primary mb-2" style="margin-left: 10px;">Closed tickets</a>
+    </form>
+
+
+
+    <!-- Product Table -->
+    <table border="1" class="table table-dark">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Phone Number</th>
+            <th>Address / City</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th  style="color: lime;">Ticket State</th>
+            <th>Serial Number</th>
+            <th>User Name</th>
+            <th>Subject</th>
+            <th>Ticket Source</th>
+            <th>Department</th>
+            <th>Help Topic</th>
+            <th>Priority</th>
+            <th>Device Model</th>
+            <th>Category</th>
+            <th>Assigned To</th>
+
+            <th> </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ticket : ${ticket}">
+            <td th:text="${ticket.id}"></td>
+            <td th:text="${ticket.phoneNumber}"></td>
+            <td th:text="${ticket.city}"></td>
+            <td th:text="${ticket.fullName}"></td>
+            <td th:text="${ticket.email}"></td>
+            <td th:text="${ticket.ticketState}"
+                th:style="${ticket.ticketState == 1 ? 'color: lime;' : ''}"></td>
+
+            <td th:text="${ticket.serialNumber}"></td>
+            <td th:text="${ticket.userName}"></td>
+            <td th:text="${ticket.subject}"></td>
+            <td th:text="${ticket.ticketSource}"></td>
+            <td th:text="${ticket.department}"></td>
+            <td th:text="${ticket.helpTopic}"></td>
+            <td th:text="${ticket.priority}"></td>
+            <td th:text="${ticket.deviceModel}"></td>
+            <td th:text="${ticket.category}"></td>
+            <td th:text="${ticket.assignedTo}"></td>
+
+            <td>
+                <!-- Add action buttons as needed -->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+</body>
+</html>
